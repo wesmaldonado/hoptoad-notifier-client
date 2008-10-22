@@ -1,0 +1,7 @@
+History.txt
+Manifest.txt
+README.txt
+Rakefile
+bin/hoptoad-notifier-client
+lib/hoptoad-notifier-client
+test/hoptoad-notifier-client
