@@ -1,26 +1,58 @@
 = hoptoad-notifier-client
 
-* Nothing yet, no website, this is it.
+Posts exceptions to http://www.optoadapp.com using their api: http://wesmaldonado.hoptoadapp.com/pages/api
 
 == DESCRIPTION:
 
-Sends exceptions to Hoptoad [http://www.hoptoadapp.com/] using HTTParty
+Sends exceptions to Hoptoad [http://www.hoptoadapp.com/].  Supports reporting against multiple api keys and customized error_types/messages when you're too lazy to subclass exception but still want to report something.
 
+or...
 
+A standalone tiny HoptoadNotifier.  Supports posting to multiple projects (aka api keys).  Posting exceptions or information ala Eugene Bolshakov's post http://www.taknado.com/2008/10/19/hoptoad-as-an-online-events-log with ease.
+ 
 == FEATURES/PROBLEMS:
 
+=== Features ===
+
 * Easy to use in non-rails apps and less code than doing it yourself.
-* Can pass in 'request' and 'response' as optional arguments.
+* Matches the HoptoadNotifier API
+* Supports multiple projects (api keys) so you can configure it once via an intializer in rails and have it report against many projects (or business units/features/etc.)
+
+=== Problems ===
+
+* Its only a few lines of code, so why use it at all? :)
+* I'm lazy and need to move the specs from the work project into this branch.
 
 == SYNOPSIS:
 
   HoptoadNotifierClient.configure do |toad|
-    toad.api_key = 'your-api-key'
+	  # Only have one project on Hoptoad?  
+	  # Register a default and you can use the shorter HoptoadNotifierClient.notify(exception) method
+    toad.register(:default, 'default-api-key')
+
+		# What!?!?  Several projects or sub components you want to report via separate projects?
+	  # Register them with a names like :profitable_feature 
+    toad.register(:profitable_feature, 'profitable-feature-api-key')
+
   end
+
+Sometime later in your code... 
+
   begin
     raise 'Not a happy camper!'
   rescue => ex
+    # reports using :default project
     HoptoadNotifierClient.notify(ex)
+
+	  # reports using profitable feature project, unbelievable!    
+	  HoptoadNotifierClient.create(:profitable_feature).notify(exception)
+
+	  # reports random information for the profitable feature project, unbelievable!
+		error_report = OpenStruct.new(:error_type => 'random thing', :custom_message => 'where am I?')
+    #  Hoptoad Notifcation Subject Line looks like this
+    # [Profitable Feature] : #{error_type}: #{custom_message}
+	  HoptoadNotifierClient.create(:profitable_feature).notify(error_report, more_detail_as_request_parameter)
+
   end
 
 == REQUIREMENTS:
