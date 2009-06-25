@@ -1,8 +1,8 @@
-= hoptoad-notifier-client
+# hoptoad-notifier-client
 
-Posts exceptions to http://www.optoadapp.com using their api: http://wesmaldonado.hoptoadapp.com/pages/api
+Posts exceptions to http://www.hoptoadapp.com using their API.
 
-== DESCRIPTION:
+## DESCRIPTION:
 
 Sends exceptions to Hoptoad [http://www.hoptoadapp.com/].  Supports reporting against multiple api keys and customized error_types/messages when you're too lazy to subclass exception but still want to report something.
 
@@ -10,27 +10,27 @@ or...
 
 A standalone tiny HoptoadNotifier.  Supports posting to multiple projects (aka api keys).  Posting exceptions or information ala Eugene Bolshakov's post http://www.taknado.com/2008/10/19/hoptoad-as-an-online-events-log with ease.
  
-== FEATURES/PROBLEMS:
+## FEATURES/PROBLEMS
 
-=== Features ===
+### Features ###
 
+* Available as a gem thanks to [maser](http://github.com/maser)
 * Easy to use in non-rails apps and less code than doing it yourself.
 * Matches the HoptoadNotifier API
 * Supports multiple projects (api keys) so you can configure it once via an intializer in rails and have it report against many projects (or business units/features/etc.)
 
-=== Problems ===
+### Problems ###
 
 * Its only a few lines of code, so why use it at all? :)
 * I'm lazy and need to move the specs from the work project into this branch.
 
-== SYNOPSIS:
+## SYNOPSIS:
 
   HoptoadNotifierClient.configure do |toad|
-	  # Only have one project on Hoptoad?  
 	  # Register a default and you can use the shorter HoptoadNotifierClient.notify(exception) method
     toad.register(:default, 'default-api-key')
 
-		# What!?!?  Several projects or sub components you want to report via separate projects?
+		# Several projects or sub components you want to report via separate projects?
 	  # Register them with a names like :profitable_feature 
     toad.register(:profitable_feature, 'profitable-feature-api-key')
 
@@ -55,15 +55,15 @@ Sometime later in your code...
 
   end
 
-== REQUIREMENTS:
+## REQUIREMENTS
 
-* HTTParty
+* [HTTParty](http://github.com/jnunemaker/httparty/tree/master)
 
-== INSTALL:
+## INSTALL
 
-* TODO (sudo gem install, anything else)
+* TODO gem install hoptoad-notifier-client --source http://gems.github.com
 
-== LICENSE:
+## LICENSE
 
 (The MIT License)
 
