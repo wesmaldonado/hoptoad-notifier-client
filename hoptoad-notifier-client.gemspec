@@ -6,6 +6,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Wes Maldonado (code)", "Martin Luder (rubygem)"]
+  s.email = %q{wes@brokenbuild.com},
   s.date = %q{2009-06-25}
   s.extra_rdoc_files = [
     "README.txt"
@@ -19,7 +20,7 @@ Gem::Specification.new do |s|
     "lib/hoptoad_notifier_client.rb"
   ]
   s.has_rdoc = true
-  s.homepage = %q{http://github.com/maser/hoptoad-notifier-client/tree/master}
+  s.homepage = %q{http://github.com/wesmaldonado/hoptoad-notifier-client/tree/master}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.2}
